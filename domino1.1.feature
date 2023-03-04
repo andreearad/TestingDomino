@@ -1,5 +1,13 @@
 Feature: Testare Domino.ro
 
+  Background: log-in Domino.ro
+  //  Given open Domino website
+  //  And click authentication button
+  //  Then enter email "andreea_rad@icloud.com" and continue
+  //  Then enter password "Domino123" and continue
+
+
+
   Scenario: Log-in Domino.ro and enter search criteria
   Given open Domino website
   And click authentication button

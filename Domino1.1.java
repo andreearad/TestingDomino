@@ -155,12 +155,35 @@ public class Domino1 {
         sleep(500);
         js.executeScript("window.scrollBy(0,400)", "");
         sleep(1000);
+        js.executeScript("window.scrollTo(0, 10)", "");
+        js.executeScript("window.scrollBy(0,100)", "");
+        driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
+        //nu stiu de ce se comporta ca si cand nu e logat, deci cand am realizar ca in scenatriul 2 nu mai era
+        //am pus in background
+        enter_email_and_continue("andreea_rad@icloud.com");
+        enter_password_and_continue("Domino123");
+        driver.findElement(By.xpath("//button[contains(text(),'Autentificare')]")).click();
+        //String url2 = driver.getCurrentUrl();
+        //System.out.println(url2);
+        driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
+        js.executeScript("window.scrollBy(0,200)", "");
+        driver.findElement(By.xpath("//*[@id='favoritesnote']")).sendKeys("Imi place acest apartament.");
+        sleep(500);
+        js.executeScript("window.scrollBy(0,100)", "");
+        driver.findElement(By.xpath("//*[contains(text(),'Adauga nota')]")).click();
+        sleep(1000);
+        driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
+        sleep(1000);
+
 
     }
     @Then("go back and click on another")
     public void go_back_and_click_on_another() throws InterruptedException {
-        driver. navigate(). back();
+        // driver. navigate(). back();
+        // nu mai pot merge inapoi, intrucat au fost paginile in plus cu relogarea
+        driver.get("https://www.domino.ro/cautare-detaliata/productcategory/apartamente-vanzari/ultrafilter1/242-596/119-347/68-1106/159-1257");
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        sleep(500);
         js.executeScript("window.scrollBy(0,350)", "");
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-mobilat-utilat-parcare-25749-25749.jpg?v=638131028183913145']")).click();
         sleep(1000);
