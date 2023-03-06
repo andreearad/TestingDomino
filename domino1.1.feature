@@ -5,6 +5,7 @@ Feature: Testare Domino.ro
   //  And click authentication button
   //  Then enter email "andreea_rad@icloud.com" and continue
   //  Then enter password "Domino123" and continue
+  // urmeaza sa revin si sa modific scenariul 1
 
 
 
