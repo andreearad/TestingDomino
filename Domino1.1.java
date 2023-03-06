@@ -71,6 +71,8 @@ public class Domino1 {
     @Then("select city")
     public void select_city() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id='atributeultrafiltrationcategory_2']/div[2]/div/div[2]/div[2]/div[1]/div/div[1]/label/span")).click();
+        //dupa id-urile cu 'selectedcountermain' si 'checkbox_nr...' nu functioneaza
+        //urmeaza sa revin asupra lor, momentan voiam sa ruleze programul ca sa pot continua
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,150)", "");
         sleep(1000);
@@ -158,8 +160,9 @@ public class Domino1 {
         js.executeScript("window.scrollTo(0, 10)", "");
         js.executeScript("window.scrollBy(0,100)", "");
         driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
-        //nu stiu de ce se comporta ca si cand nu e logat, deci cand am realizar ca in scenatriul 2 nu mai era
-        //am pus in background
+        //nu stiu de ce se comporta ca si cand nu e logat, desi cand am realizat ca in scenariul 2 nu mai era
+        //logat am pus in background; tot nu mergea; ulterior am facut altfel ca sa nu ma blochez si sa pot continua
+        //umreaza sa revin la partea de background si sa modific scenariul 1 
         enter_email_and_continue("andreea_rad@icloud.com");
         enter_password_and_continue("Domino123");
         driver.findElement(By.xpath("//button[contains(text(),'Autentificare')]")).click();
