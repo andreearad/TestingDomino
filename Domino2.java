@@ -330,10 +330,12 @@ public class Domino2 {
     }
 
 
-
-
-
-
+/* De facut:
+- driver clasa diferita
+- getter url, pt final de background si final scenariul 1
+- pasi reutilizabili
+- verificare "sterge" produse multiple in cont
+- link anunt ultimul pas */
 
 
 
