@@ -1,13 +1,13 @@
 Feature: Testare Domino.ro
 
-  Background:
-  Given open Domino website1
-  Then aceept cookies and click authentication button
-  And enter email "andreea_rad@icloud.com" and continue1
-  Then enter password "Domino123" and continue1
+  Background:Autentificare si acceptare cookies
+  Given deschide site-ul Domino
+  Then aceepta cookies si acceseaza autentificarea
+  And introduce email "andreea_rad@icloud.com"
+  Then introduce parola "Domino123"
 
-  Scenario: enter search criteria
-    Given search appartments
+  Scenario: Introducere filtre de cautare
+    Given cauta apartamente
     Then categorie filtrare "Localizare"
     Then selectie filtru "Localitate"
     Then filtreaza dupa "Cluj-Napoca"
@@ -21,10 +21,10 @@ Feature: Testare Domino.ro
     Then filtreaza dupa "Buna"
     Then show result
 
-  Scenario: creeare lista fvorite
+  Scenario: Creeare lista fvorite
     Given salveaza cautarea
     And selecteaza apartamentul
-    And afiseaza detaliisi adauga la favorite
+    And afiseaza detalii si adauga la favorite
     Then alege alt apartament si ascunde
     Then ia legatura si proprietarul si raporteaza pret gresit
     Then raporteaza vandut si ascunde
@@ -32,7 +32,7 @@ Feature: Testare Domino.ro
     Then alege si adauga la favorite
 
 
-  Scenario: verificare anunturi salvate
+  Scenario: Verificare anunturi salvate
     Given acceseaza contul meu
     And sterge anunturile ascunse
     Then sterge cautarea
