@@ -56,11 +56,12 @@ public class Domino2 {
     }
 
 
-// ------------ scenariul I ----------------
+// ------------ SCENARIUL I ----------------
 
     @Given("cauta apartamente")
-    public void cauta_apartamente() {
+    public void cauta_apartamente() throws InterruptedException {
         driver.findElement(By.xpath("//*[@class='level1']")).click();
+        sleep(500);
         driver.findElement(By.xpath("//*[@class='glyphicon glyphicon-search']")).click();
     }
 
@@ -69,7 +70,6 @@ public class Domino2 {
         for (WebElement i : driver.findElements(By.xpath("//*[contains(@class,'ParentTitle')]/div"))){
             if (i.getText().toLowerCase().equalsIgnoreCase(lc)){
                 i.click();
-                sleep(1000);
             }
         }
     }
@@ -79,10 +79,8 @@ public class Domino2 {
         for (WebElement i : driver.findElements(By.xpath("//*[contains(@class,'FilterToogle')]"))){
             if (i.getText().toLowerCase().equalsIgnoreCase(lct)){
                 i.click();
-                sleep(1000);
             }
         }
-       // throw new io.cucumber.java.PendingException();
     }
 
     @Then("filtreaza dupa {string}") //partea asta nu merge
@@ -90,10 +88,8 @@ public class Domino2 {
         for (WebElement i : driver.findElements(By.xpath("//*[contains(@class,'atributes-row')]/div"))){
             if (i.getText().toLowerCase().equalsIgnoreCase(clj)){
                 i.findElement(By.xpath("./../div")).click();
-                sleep(1000);
             }
         }
-       // throw new io.cucumber.java.PendingException();
     }
 
     @Then("show result")
@@ -102,10 +98,9 @@ public class Domino2 {
         sleep(1000);
         String url = driver.getCurrentUrl();
         out.println(url);
-      //  throw new io.cucumber.java.PendingException();
     }
 
-// ------------ scenariul II ----------------
+// ------------ SCENARIUL II ----------------
 
     @Given("salveaza cautarea")
     public void salveaza_cautarea() throws InterruptedException {
@@ -113,9 +108,9 @@ public class Domino2 {
         sleep(2000);
         driver.findElement(By.xpath("//*[contains(text(),'Salveaza Cautarea')]")).click();
         sleep(1000);
+        driver.findElement(By.id("requestnote")).sendKeys("Ma intereseaza aceste criterii de cautare.");
         driver.findElement(By.xpath("//*[contains(text(),'Cauta in continuare')]")).click();
         sleep(500);
-       // throw new io.cucumber.java.PendingException();
     }
     @Given("selecteaza apartamentul")
     public void selecteaza_apartamentul() throws InterruptedException {
@@ -135,7 +130,7 @@ public class Domino2 {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,150)", "");
         //driver.findElement(By.xpath("//*[@id=['DivArroundFrontProductCategoryController']]/div[1]/div[1]/a/img")).click();
-       // driver.findElement(By.xpath("//*[@src=['/filehandler/ProductFirstFile/500x500/3-camere-etaj-intermediar-parcare-22907-22907.jpg?v=638174955837450740']")).click();
+        //driver.findElement(By.xpath("//*[@src=['/filehandler/ProductFirstFile/500x500/3-camere-etaj-intermediar-parcare-22907-22907.jpg?v=638174955837450740']")).click();
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/3-camere-mobilat-utilat-parcare-25750-25750.jpg?v=638131040738246261']")).click();
         sleep(1000);
     }
@@ -147,7 +142,6 @@ public class Domino2 {
         sleep(500);
         js.executeScript("window.scrollBy(0,50)", "");
         sleep(500);
-        // JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,150)", "");
         sleep(500);
         js.executeScript("window.scrollBy(0,100)", "");
@@ -183,13 +177,17 @@ public class Domino2 {
         js.executeScript("window.scrollBy(0,450)", "");
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-mobilat-utilat-parcare-25749-25749.jpg?v=638131028183913145']")).click();
         sleep(1000);
+        driver.findElement(By.id("xzoom-fancy")).click();
+        sleep(1200);
+        js.executeScript("window.scrollBy(0,100)", "");
+        sleep(500);
+        driver.findElement(By.xpath("//*[@title='Close']")).click();
         driver.findElement(By.xpath("//*[contains(text(),'Ascunde')]")).click();
         sleep(1000);
         js.executeScript("window.scrollBy(0,100)", "");
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
         driver. navigate(). back();
-      //  throw new io.cucumber.java.PendingException();
     }
 
     @Then("ia legatura si proprietarul si raporteaza pret gresit")
@@ -200,16 +198,13 @@ public class Domino2 {
         driver.findElement(By.xpath("//*[@id='TelefonProprietar']")).click();
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Pret Gresit')]")).click();
-        //21.4 aici s-a oprit
-        // xpath 2 rezultate
         sleep(1200);
-       // driver.findElement(By.xpath("//*[contains(text(),'Anuleaza')]")).click();
+        //driver.findElement(By.xpath("//*[contains(text(),'Anuleaza')]")).click();
+        //xpath 2 rezultate
         driver.findElement(By.xpath("//*[@id='AlertWrongPrice']/button[2]")).click();
         sleep(1200);
         driver. navigate(). back();
         sleep(1200);
-
-       // throw new io.cucumber.java.PendingException();
     }
 
     @Then("raporteaza vandut si ascunde")
@@ -222,24 +217,24 @@ public class Domino2 {
         driver.findElement(By.xpath("//*[contains(text(),'Anuleaza')]")).click();
         sleep(1200);
         driver.findElement(By.xpath("//*[contains(text(),'Ascunde')]")).click();
-        sleep(1000);
+        sleep(1200);
         js.executeScript("window.scrollBy(0,100)", "");
-        sleep(1000);
+        sleep(1200);
+        driver.findElement(By.id("hiddensnote")).sendKeys("Stiu ca este vandut.");
+        sleep(600);
         driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
         driver. navigate(). back();
-       // throw new io.cucumber.java.PendingException();
     }
 
     @Then("sorteaza crescator anunturile")
     public void sorteaza_crescator_anunturile() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-       // js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        //js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         js.executeScript("window.scrollBy(0,-5000)", "");
         driver.findElement(By.id("SortBy2")).click();
-        sleep(500);
+        sleep(800);
         driver.findElement(By.xpath("//*[contains(text(),'Pret Crescator')]")).click();
-        sleep(500);
-      //  throw new io.cucumber.java.PendingException();
+        sleep(800);
     }
 
     @Then("alege si adauga la favorite")
@@ -248,6 +243,17 @@ public class Domino2 {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,120)", "");
         sleep(500);
+        driver.findElement(By.id("xzoom-fancy")).click();
+        sleep(600);
+        js.executeScript("window.scrollBy(0,100)", "");
+        sleep(600);
+        driver.findElement(By.xpath("//*[@title='Close']")).click();
+        sleep(500);
+        //*[@title='Close']//driver.findElement(By.xpath("//*[@id='fancybox-container-2']/div[3]/div/a[2]")).click();
+        //sleep(600);
+        //driver.findElement(By.xpath("//*[@id='fancybox-container-2']/div[3]/div/a[7]")).click();
+        //sleep(600);
+        //driver.findElement(By.xpath("//*[@id='fancybox-container-2']/div[2]/div[2]/button[4]/svg")).click();
         driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
         sleep(1000);
         js.executeScript("window.scrollBy(0,200)", "");
@@ -258,11 +264,10 @@ public class Domino2 {
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
         sleep(1000);
-       // throw new io.cucumber.java.PendingException();
     }
 
 
-// ------------ scenariul III ----------------
+// ------------ SCENARIUL III ----------------
 
     @Given("acceseaza contul meu")
     public void acceseaza_contul_meu() throws InterruptedException {
@@ -279,17 +284,16 @@ public class Domino2 {
         //cred ca este numarul de cate ori a fost adaugat la favorite
         sleep(1000);
         //driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
-        driver.findElement(By.id("679")).click();
+        driver.findElement(By.xpath("//*[@id='714']")).click();
         driver.switchTo().alert().accept();
         out.println("Waiting for 1 sec..");
         sleep(1_000);
         sleep(1000);
-        driver.findElement(By.id("679")).click();
+        driver.findElement(By.xpath("//*[@id='715']")).click();
         driver.switchTo().alert().accept();
         out.println("Waiting for 1 sec..");
         sleep(1_000);
         // driver. navigate(). back();
-        //throw new io.cucumber.java.PendingException();
     }
     @Then("sterge cautarea")
     public void sterge_cautarea() throws InterruptedException {
@@ -299,18 +303,20 @@ public class Domino2 {
         driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
         sleep(1000);
         driver. navigate(). back();
-        //throw new io.cucumber.java.PendingException();
     }
     @Then("sterge anunutul favorit")
     public void sterge_anunutul_favorit() throws InterruptedException {
         driver.findElement(By.xpath("//*[contains(text(),'Favorite')]")).click();
         sleep(1000);
-        driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
+        //driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
+        //sleep(1000);
+        driver.findElement(By.xpath("//*[@id='5810']")).click();
+        driver.switchTo().alert().accept();
+        out.println("Waiting for 1 sec..");
+        sleep(1_000);
         sleep(1000);
         //driver. navigate(). back();
-        //*[@id='5779']
         //de modificat, id se incrementeaza
-        //throw new io.cucumber.java.PendingException();
     }
     @Then("ia legatura cu vanzatorul si raporteaza vandut")
     public void ia_legatura_cu_vanzatorul_si_raporteaza_vandut() throws InterruptedException {
@@ -323,13 +329,7 @@ public class Domino2 {
         sleep(1200);
         driver.findElement(By.xpath("//*[contains(text(),'Anuleaza')]")).click();
         sleep(1200);
-        //throw new io.cucumber.java.PendingException();
     }
-
-
-
-
-
 
 
 
