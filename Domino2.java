@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.List;
+
 import static java.lang.System.out;
 import static java.lang.Thread.sleep;
 
@@ -83,7 +85,7 @@ public class Domino2 {
         }
     }
 
-    @Then("filtreaza dupa {string}") //partea asta nu merge
+    @Then("filtreaza dupa {string}")
     public void filtreaza_dupa(String clj) throws InterruptedException {
         for (WebElement i : driver.findElements(By.xpath("//*[contains(@class,'atributes-row')]/div"))){
             if (i.getText().toLowerCase().equalsIgnoreCase(clj)){
@@ -109,34 +111,20 @@ public class Domino2 {
         driver.findElement(By.xpath("//*[contains(text(),'Salveaza Cautarea')]")).click();
         sleep(1000);
         driver.findElement(By.id("requestnote")).sendKeys("Ma intereseaza aceste criterii de cautare.");
+        sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Cauta in continuare')]")).click();
         sleep(500);
     }
     @Given("selecteaza apartamentul")
     public void selecteaza_apartamentul() throws InterruptedException {
-        // get url; momentan nu merg pasii deci nu am cum
-        // voi revenii
-        //driver.get("https://www.domino.ro/cautare-detaliata/productcategory/apartamente-vanzari/ultrafilter1/242-596/119-347/68-1106/159-1257");
-        //sleep(2000);
-        //driver.findElement(By.xpath("//*[@aria-label='dismiss cookie message']")).click();
-        // incercare 1  WebElement element = driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/3-camere-mobilat-utilat-parcare-25750-25750.jpg?v=638131040738246261']")); element.sendKeys(Keys.DOWN);
-        // incerrcare 2  WebElement element = driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/3-camere-mobilat-utilat-parcare-25750-25750.jpg?v=638131040738246261']"));
-        // ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        /*incercarea 3  WebElement element = driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/3-camere-mobilat-utilat-parcare-25750-25750.jpg?v=638131040738246261']"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element);
-        actions.click();
-        sleep(500); */
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,150)", "");
-        //driver.findElement(By.xpath("//*[@id=['DivArroundFrontProductCategoryController']]/div[1]/div[1]/a/img")).click();
-        //driver.findElement(By.xpath("//*[@src=['/filehandler/ProductFirstFile/500x500/3-camere-etaj-intermediar-parcare-22907-22907.jpg?v=638174955837450740']")).click();
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/3-camere-mobilat-utilat-parcare-25750-25750.jpg?v=638131040738246261']")).click();
         sleep(1000);
     }
 
-    @Given("afiseaza detalii si adauga la favorite")
-    public void afiseaza_detalii_si_adauga_la_favorite() throws InterruptedException {
+    @Given("afiseaza detalii")
+    public void afiseaza_detalii() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,50)", "");
         sleep(500);
@@ -158,7 +146,7 @@ public class Domino2 {
         sleep(1000);
         js.executeScript("window.scrollTo(0, 10)", "");
         js.executeScript("window.scrollBy(0,100)", "");
-        driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
+        /*driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
         sleep(1000);
         js.executeScript("window.scrollBy(0,200)", "");
         driver.findElement(By.xpath("//*[@id='favoritesnote']")).sendKeys("Imi place acest apartament, de tinut minte.");
@@ -167,12 +155,13 @@ public class Domino2 {
         driver.findElement(By.xpath("//*[contains(text(),'Adauga nota')]")).click();
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
-        sleep(1000);
+        sleep(1000); */
     }
-    @Then("alege alt apartament si ascunde")
-    public void alege_alt_apartament_si_ascunde() throws InterruptedException {
+    @Then("alege alt apartament")
+    public void alege_alt_apartament() throws InterruptedException {
         driver. navigate(). back();
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,100)", "");
         sleep(500);
         js.executeScript("window.scrollBy(0,450)", "");
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-mobilat-utilat-parcare-25749-25749.jpg?v=638131028183913145']")).click();
@@ -182,11 +171,18 @@ public class Domino2 {
         js.executeScript("window.scrollBy(0,100)", "");
         sleep(500);
         driver.findElement(By.xpath("//*[@title='Close']")).click();
-        driver.findElement(By.xpath("//*[contains(text(),'Ascunde')]")).click();
+        js.executeScript("window.scrollBy(0,50)", "");
+        sleep(500);
+        js.executeScript("window.scrollBy(0,100)", "");
+        sleep(500);
+        js.executeScript("window.scrollBy(0,150)", "");
+        sleep(500);
+
+        /*driver.findElement(By.xpath("//*[contains(text(),'Ascunde')]")).click();
         sleep(1000);
         js.executeScript("window.scrollBy(0,100)", "");
         sleep(1000);
-        driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
+        driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click(); */
         driver. navigate(). back();
     }
 
@@ -195,8 +191,21 @@ public class Domino2 {
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/3-camere-mobilat-utilat-parcare-23801-23801.jpg?v=638030060490990543']")).click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,120)", "");
-        driver.findElement(By.xpath("//*[@id='TelefonProprietar']")).click();
+        sleep(600);
+        driver.findElement(By.id("xzoom-fancy")).click();
+        sleep(600);
+        js.executeScript("window.scrollBy(0,100)", "");
+        sleep(600);
+        driver.findElement(By.xpath("//*[@title='Close']")).click();
         sleep(1000);
+        js.executeScript("window.scrollBy(0,50)", "");
+        sleep(500);
+        js.executeScript("window.scrollBy(0,50)", "");
+        sleep(500);
+        js.executeScript("window.scrollBy(0,150)", "");
+        sleep(500);
+        driver.findElement(By.xpath("//*[@id='TelefonProprietar']")).click();
+        sleep(1200);
         driver.findElement(By.xpath("//*[contains(text(),'Pret Gresit')]")).click();
         sleep(1200);
         //driver.findElement(By.xpath("//*[contains(text(),'Anuleaza')]")).click();
@@ -209,8 +218,10 @@ public class Domino2 {
 
     @Then("raporteaza vandut si ascunde")
     public void raporteaza_vandut_si_ascunde() throws InterruptedException {
-        driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-decomandat-parcare-boxa-14062-14062.jpg?v=638023922018656610']")).click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)", "");
+        //driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-decomandat-parcare-boxa-14062-14062.jpg?v=638023922018656610']")).click();
+        driver.findElement(By.xpath("//*[@id='DivArroundFrontProductCategoryController']/div[14]/div[1]")).click();
         js.executeScript("window.scrollBy(0,120)", "");
         driver.findElement(By.xpath("//*[contains(text(),'Vandut')]")).click();
         sleep(1200);
@@ -223,6 +234,7 @@ public class Domino2 {
         driver.findElement(By.id("hiddensnote")).sendKeys("Stiu ca este vandut.");
         sleep(600);
         driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
+        sleep(500);
         driver. navigate(). back();
     }
 
@@ -230,7 +242,7 @@ public class Domino2 {
     public void sorteaza_crescator_anunturile() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        js.executeScript("window.scrollBy(0,-5000)", "");
+        js.executeScript("window.scrollBy(0,-6000)", "");
         driver.findElement(By.id("SortBy2")).click();
         sleep(800);
         driver.findElement(By.xpath("//*[contains(text(),'Pret Crescator')]")).click();
@@ -240,6 +252,7 @@ public class Domino2 {
     @Then("alege si adauga la favorite")
     public void alege_si_adauga_la_favorite() throws InterruptedException {
         driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-mobilat-utilat-parcare-20239-20239.jpg?v=637895235739348699']")).click();
+        sleep(600);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,120)", "");
         sleep(500);
@@ -249,17 +262,17 @@ public class Domino2 {
         sleep(600);
         driver.findElement(By.xpath("//*[@title='Close']")).click();
         sleep(500);
-        //*[@title='Close']//driver.findElement(By.xpath("//*[@id='fancybox-container-2']/div[3]/div/a[2]")).click();
-        //sleep(600);
-        //driver.findElement(By.xpath("//*[@id='fancybox-container-2']/div[3]/div/a[7]")).click();
-        //sleep(600);
-        //driver.findElement(By.xpath("//*[@id='fancybox-container-2']/div[2]/div[2]/button[4]/svg")).click();
+        js.executeScript("window.scrollBy(0,50)", "");
+        sleep(500);
+        js.executeScript("window.scrollBy(0,100)", "");
+        sleep(500);
         driver.findElement(By.xpath("//*[contains(text(),'Favorit')]")).click();
         sleep(1000);
         js.executeScript("window.scrollBy(0,200)", "");
         driver.findElement(By.xpath("//*[@id='favoritesnote']")).sendKeys("Doresc sa fac o oferta!");
         sleep(1000);
         js.executeScript("window.scrollBy(0,90)", "");
+        sleep(500);
         driver.findElement(By.xpath("//*[contains(text(),'Adauga nota')]")).click();
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Inchide')]")).click();
@@ -271,58 +284,58 @@ public class Domino2 {
 
     @Given("acceseaza contul meu")
     public void acceseaza_contul_meu() throws InterruptedException {
-        // getter de la finalul background-ului
-        // driver.get("https://www.domino.ro/vanzari/apartamente-vanzari/2-camere-mobilat-utilat-parcare-20239");
-        driver.findElement(By.xpath("//*[contains(text(),'Oferte salvate')]")).click();
         sleep(1000);
-        throw new io.cucumber.java.PendingException();
+
     }
-    @Given("sterge anunturile ascunse")
+    @And("sterge anunturile ascunse")
     public void sterge_anunturile_ascunse() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)", "");
         driver.findElement(By.xpath("//*[@id='Hiddens']")).click();
-        // id-ul pentru a sterge un anunt, se incrementeaza de cate ori este adaugat in lista
-        //cred ca este numarul de cate ori a fost adaugat la favorite
-        sleep(1000);
-        //driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
-        driver.findElement(By.xpath("//*[@id='714']")).click();
-        driver.switchTo().alert().accept();
-        out.println("Waiting for 1 sec..");
-        sleep(1_000);
-        sleep(1000);
-        driver.findElement(By.xpath("//*[@id='715']")).click();
-        driver.switchTo().alert().accept();
-        out.println("Waiting for 1 sec..");
-        sleep(1_000);
-        // driver. navigate(). back();
-    }
-    @Then("sterge cautarea")
-    public void sterge_cautarea() throws InterruptedException {
-        driver.findElement(By.id("Requests")).click();
-        //de verificat ca e ok
+        js.executeScript("window.scrollBy(0,200)", "");
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
         sleep(1000);
-        driver. navigate(). back();
-    }
-    @Then("sterge anunutul favorit")
-    public void sterge_anunutul_favorit() throws InterruptedException {
-        driver.findElement(By.xpath("//*[contains(text(),'Favorite')]")).click();
-        sleep(1000);
-        //driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
-        //sleep(1000);
-        driver.findElement(By.xpath("//*[@id='5810']")).click();
         driver.switchTo().alert().accept();
         out.println("Waiting for 1 sec..");
         sleep(1_000);
+
+    }
+
+    @Then("sterge cautarea")
+    public void sterge_cautarea() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)", "");
+        driver.findElement(By.id("Requests")).click();
+        sleep(1000);
+        driver.findElement(By.xpath("//*[@class='glyphicon glyphicon-remove']")).click();
+        sleep(1000);
+        driver.switchTo().alert().accept();
+        sleep(1000);
+        driver. navigate(). back();
+    }
+    /*@Then("sterge anunutul favorit")
+    public void sterge_anunutul_favorit() throws InterruptedException {
+        driver.findElement(By.xpath("//*[contains(text(),'Oferte salvate')]")).click();
+        //driver.findElement(By.xpath("//*[contains(text(),'Favorite')]")).click();
+        sleep(1000);
+        driver.findElement(By.xpath("//*[contains(text(),'Sterge')]")).click();
+        //sleep(1000);
+        //driver.findElement(By.xpath("//*[@id='5810']")).click();
+        //driver.switchTo().alert().accept();
+        //out.println("Waiting for 1 sec..");
+        //sleep(1_000);
         sleep(1000);
         //driver. navigate(). back();
         //de modificat, id se incrementeaza
-    }
+    } */
     @Then("ia legatura cu vanzatorul si raporteaza vandut")
     public void ia_legatura_cu_vanzatorul_si_raporteaza_vandut() throws InterruptedException {
-        driver.findElement(By.xpath("src='/filehandler/ProductFirstFile/500x500/2-camere-mobilat-utilat-parcare-20239-20239.jpg?v=637895235739348699'")).click();
+        driver.findElement(By.xpath("//*[contains(text(),'Oferte salvate')]")).click();
+        driver.findElement(By.xpath("//*[@src='/filehandler/ProductFirstFile/500x500/2-camere-mobilat-utilat-parcare-20239-20239.jpg?v=637895235739348699']")).click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,120)", "");
+        sleep(600);
         driver.findElement(By.xpath("//*[@id='TelefonProprietar']")).click();
         sleep(1000);
         driver.findElement(By.xpath("//*[contains(text(),'Vandut')]")).click();
